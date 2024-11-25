@@ -1,0 +1,8 @@
+[package]
+name = "EverybodyCodes-2024-15"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aochelpers = "*"
+itertools = "*"
