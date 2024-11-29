@@ -89,8 +89,7 @@ fn find_meeting_point(mut meteor: Coordinate<isize>, launcher: &Coordinate<isize
     let power = meet_y - launcher.y;
     if meet_x >= power && meet_x <= power *2 {
         return Some(power * (launcher.y+1));
-    } else {
-    }
+    } 
     // At this point, we're on the downstroke,
     if( meet_x + (meet_y - launcher.y)) % 3 != 0 || meet_y - launcher.y > meet_x {
         None

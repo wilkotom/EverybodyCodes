@@ -1,4 +1,4 @@
-use std::{collections::{BinaryHeap, HashMap, HashSet}, error::Error, usize};
+use std::{collections::{BinaryHeap, HashMap, HashSet}, error::Error};
 
 use aochelpers::{Coordinate, ScoredItem, get_everybodycodes_input};
 
