@@ -1,19 +1,21 @@
-use std::{fs::read_to_string, isize};
+use std::error::Error;
+use aochelpers::{Coordinate, get_everybodycodes_input};
 
-use aochelpers::Coordinate;
-
-fn main() {
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q12_p1.txt").unwrap();
+fn main()  -> Result<(), Box<dyn Error>>  {
+    let input = get_everybodycodes_input(12, 2024, 1)?;
     let mut targets = Vec::new();
     let mut launchers = Vec::new();
     parse_data(&input, &mut targets, &mut launchers);
     println!("Part 1: {}", targets.iter().map(|t| part1(t, &launchers)).sum::<isize>());
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q12_p2.txt").unwrap();
+    
+    let input = get_everybodycodes_input(12, 2024, 2)?;
     let mut targets = Vec::new();
     let mut launchers = Vec::new();
     parse_data(&input, &mut targets, &mut launchers);
     println!("Part 2: {}", targets.iter().map(|t| part1(t, &launchers)).sum::<isize>());
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q12_p3.txt").unwrap();
+    
+    
+    let input = get_everybodycodes_input(12, 2024, 3)?;
     let mut coords = Vec::new();
     for mut nums in input.lines().map(|l| l.split(' ')) {
         coords.push(Coordinate{x: nums.next().unwrap().parse::<isize>().unwrap(), 
@@ -26,6 +28,8 @@ fn main() {
         
         .sum::<isize>();
     println!("Part 3: {}", p3result) ;
+
+    Ok(())
 
 }
 

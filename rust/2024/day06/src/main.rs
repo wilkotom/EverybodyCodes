@@ -1,5 +1,5 @@
-use std::{collections::{HashMap, VecDeque}, fs::read_to_string};
-use aochelpers::Label;
+use std::{collections::{HashMap, VecDeque},error::Error};
+use aochelpers::{Label, get_everybodycodes_input};
 
 #[derive(Debug, Eq, PartialEq, Copy, Clone)]
 enum TreeNode {
@@ -7,18 +7,15 @@ enum TreeNode {
     Branch(Label)
 }
 
-fn main() {
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q06_p1.txt").unwrap();
-    let tree = parse_input(&data);
-    println!("Part 1: {}", part1(&tree, false));
+fn main() -> Result<(), Box<dyn Error>>{
 
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q06_p2.txt").unwrap();
-    let tree = parse_input(&data);
-    println!("Part 2: {}", part1(&tree, true));
+    for i in [1,2,3] {
+        let data: String = get_everybodycodes_input(6, 2024, i)?;
+        let tree = parse_input(&data);
+        println!("Part {}: {}", i, part1(&tree, i >1));
+    }
 
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q06_p3.txt").unwrap();
-    let tree = parse_input(&data);
-    println!("Part 3: {}", part1(&tree, true));
+    Ok(())
 }
 
 fn parse_input(input: &str) -> HashMap<Label, Vec<TreeNode>> {

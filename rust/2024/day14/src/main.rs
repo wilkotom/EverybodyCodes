@@ -1,19 +1,19 @@
-use std::{collections::{HashMap, HashSet, VecDeque}, fs::read_to_string};
-use aochelpers::Coordinate3d;
+use std::{collections::{HashMap, HashSet, VecDeque}, error::Error};
+use aochelpers::{Coordinate3d, get_everybodycodes_input};
 
-fn main() {
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q14_p1.txt").unwrap();
+fn main()  -> Result<(), Box<dyn Error>>  {
+    let input = get_everybodycodes_input(14, 2024, 1)?;
     let directions = parse_data(&input);
     println!("Part 1: {:?}", part2(&directions).0);
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q14_p2.txt").unwrap();
+    let input = get_everybodycodes_input(14, 2024, 2)?;
     let directions = parse_data(&input);
     println!("Part 2: {:?}", part2(&directions).1.len());
 
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q14_p3.txt").unwrap();
+    let input = get_everybodycodes_input(14, 2024, 3)?;
     let directions = parse_data(&input);
     println!("Part 3: {:?}", part3(&directions));
 
-
+    Ok(())
 
 }
 

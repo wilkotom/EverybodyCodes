@@ -1,13 +1,17 @@
-use std::fs::read_to_string;
+use std::error::Error;
+
+use aochelpers::get_everybodycodes_input;
 use cached::proc_macro::cached;
 
-fn main() {
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q09_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>>{
+    let input = get_everybodycodes_input(9, 2024, 1)?;
     println!("Part 1: {}", part1(&input, 1));
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q09_p2.txt").unwrap();
+    let input = get_everybodycodes_input(9, 2024, 2)?;
     println!("Part 2: {}", part1(&input, 2));
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q09_p3.txt").unwrap();
+    let input = get_everybodycodes_input(9, 2024, 3)?;
     println!("Part 3: {}", part3(&input));
+
+    Ok(())
 }
 
 
@@ -93,4 +97,3 @@ mod tests {
 
 }
 
-//1909 wrong answer

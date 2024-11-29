@@ -1,26 +1,28 @@
-use aochelpers::Coordinate;
-use std::{collections::{HashMap, HashSet}, fs::read_to_string};
+use aochelpers::{Coordinate, get_everybodycodes_input};
+use std::{collections::{HashMap, HashSet}, error::Error};
 
 
-fn main() {
-    let p1data = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q03_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>> {
+    let p1data = get_everybodycodes_input(3, 2024, 1)?;
     let mut p1_map = create_map(&p1data);
     while dig(&mut p1_map) {
     }
     println!("Part 1: {}",p1_map.values().sum::<isize>());
 
-    let p2data = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q03_p2.txt").unwrap();
+    let p2data =get_everybodycodes_input(3, 2024, 2)?;
     let mut p2_map = create_map(&p2data);
     while dig(&mut p2_map) {
     }
     println!("Part 2: {}",p2_map.values().sum::<isize>());
 
-    let p3data = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q03_p3.txt").unwrap();
+    let p3data =get_everybodycodes_input(3, 2024, 3)?;
     let mut p3_map = create_map(&p3data);
     while dig_p3(&mut p3_map) {
         print_map(&p3_map);
     }
     println!("Part 3: {}",p3_map.values().sum::<isize>());
+
+    Ok(())
 }
 
 fn dig(excavation: &mut HashMap<Coordinate<isize>, isize>) -> bool {

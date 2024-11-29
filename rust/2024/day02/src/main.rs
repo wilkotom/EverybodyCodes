@@ -1,22 +1,21 @@
-use std::{collections::HashSet, fs::read_to_string};
-use aochelpers::Coordinate;
+use std::{collections::HashSet, error::Error};
+use aochelpers::{get_everybodycodes_input, Coordinate};
 
-fn main() {
-    let p1data = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q02_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>>{
+    let p1data = get_everybodycodes_input(2, 2024, 1)?;
 
     let (words, inscription) = parse_data(&p1data);
     println!("Part 1: {}", find_runic_words(&words[..], inscription.first().unwrap()));
 
-    let p2data = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q02_p2.txt").unwrap();
-
+    let p2data = get_everybodycodes_input(2, 2024, 2)?;
     let (words, inscription) = parse_data(&p2data);
     println!("Part 2: {}", part2(&words[..], &inscription));
-    let p3data = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q02_p3.txt").unwrap();
-
+    
+    let p3data = get_everybodycodes_input(2, 2024, 3)?;
     let (words, inscription) = parse_data(&p3data);
     println!("Part 3: {}", find_runic_symbols_horizontally_with_wraparound(&words[..], &inscription));
 
-
+    Ok(())
 }
 
 fn part2(words: &[String], inscriptions: &[String]) -> usize {

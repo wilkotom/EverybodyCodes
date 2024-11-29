@@ -1,7 +1,8 @@
-use std::fs::read_to_string;
-fn main() {
-    let nails = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q04_p1.txt")
-        .unwrap()
+use std::error::Error;
+use aochelpers::get_everybodycodes_input;
+
+fn main() -> Result<(), Box<dyn Error>>{
+    let nails = get_everybodycodes_input(4, 2024, 1)?
         .split('\n')
         .map(|n| n.parse().unwrap_or(0))
         .collect::<Vec<_>>();
@@ -9,8 +10,7 @@ fn main() {
     let answer = nails.iter().map(|n| n - target).sum::<isize>();
     println!("Part 1: {}", answer);
 
-    let nails = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q04_p2.txt")
-        .unwrap()
+    let nails =  get_everybodycodes_input(4, 2024, 2)?
         .split('\n')
         .map(|n| n.parse().unwrap_or(0))
         .collect::<Vec<_>>();
@@ -18,13 +18,13 @@ fn main() {
     let answer = nails.iter().map(|n| n - target).sum::<isize>();
     println!("Part 2: {}", answer);
 
-    let nails = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q04_p3.txt")
-        .unwrap()
+    let nails =  get_everybodycodes_input(4, 2024, 3)?
         .split('\n')
         .map(|n| n.parse::<i64>().unwrap_or(0))
         .collect::<Vec<_>>();
         println!("Part 3: {}", part3(nails));
 
+    Ok(())
 }
 
 fn part3(mut nails:Vec<i64>) -> i64 {

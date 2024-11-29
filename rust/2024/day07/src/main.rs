@@ -1,12 +1,12 @@
-use {aochelpers::{Coordinate,Label, Direction}, std::{fs::read_to_string,collections::{HashSet,HashMap}}, itertools::Itertools};
+use {aochelpers::{get_everybodycodes_input, Coordinate, Direction, Label}, itertools::Itertools, std::{collections::{HashMap, HashSet}, error::Error}};
 
-fn main() {
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q07_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>>{
+    let data: String = get_everybodycodes_input(7, 2024, 1)?;
     let racers = parse_input(&data);
     let p1_res = part1(&racers, 10);
     println!("Part 1: {}", p1_res);
 
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q07_p2.txt").unwrap();
+    let data: String = get_everybodycodes_input(7, 2024, 2)?;
     let racers = parse_input(&data);
 
     let part2_track = parse_racetrack("S-=++=-==++=++=-=+=-=+=+=--=-=++=-==++=-+=-=+=-=+=+=++=-+==++=++=-=-=--
@@ -31,7 +31,8 @@ fn main() {
 -               = = = =   +  +  ==+ = = +   =        ++    =          -
 -               = + + =   +  -  = + = = +   =        +     =          -
 --==++++==+=+++-= =-= =-+-=  =+-= =-= =--   +=++=+++==     -=+=++==+++-");
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q07_p3.txt").unwrap();
+    
+    let data: String = get_everybodycodes_input(7, 2024, 3)?;
     let racers = parse_input(&data);
 
     let to_beat = part3(&racers.values().next().unwrap().clone(), &part3_track);
@@ -45,14 +46,7 @@ fn main() {
         }
     }
     println!("Part 3: {}", possible);
-
-    // let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q07_p2.txt").unwrap();
-    // let tree = parse_input(&data);
-    // println!("Part 2: {}", part1(&tree, true));
-
-    // let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q07_p3.txt").unwrap();
-    // let tree = parse_input(&data);
-    // println!("Part 3: {}", part1(&tree, true));
+    Ok(())
 }
 
 fn part1(riders: &HashMap<Label, Vec<i64>>, rounds: usize) -> String{

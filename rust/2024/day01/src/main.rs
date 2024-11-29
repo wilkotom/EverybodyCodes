@@ -1,12 +1,15 @@
+use aochelpers::get_everybodycodes_input;
 use itertools::Itertools;
-fn main() {
-    let p1data = std::fs::read_to_string("./part1.txt").unwrap();
+use std::error::Error;
+fn main() -> Result<(), Box<dyn Error>>{
+    let p1data = get_everybodycodes_input(1, 2024, 1)?;
     println!("Part 1: {}", combat(&p1data,1));
-    let p2data = std::fs::read_to_string("./part2.txt").unwrap();
+    let p2data = get_everybodycodes_input(1, 2024, 3)?;
     println!("Part 2: {}", combat(&p2data,2));
-    let p3data = std::fs::read_to_string("./part3.txt").unwrap();
+    let p3data = get_everybodycodes_input(1, 2024, 2)?;
     println!("Part 2: {}", combat(&p3data,3));
 
+    Ok(())
 }
 
 fn combat(creatures: &str, group_count: usize) -> usize {

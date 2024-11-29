@@ -1,12 +1,15 @@
-use std::fs::read_to_string;
+use aochelpers::get_everybodycodes_input;
+use std::error::Error;
 
-fn main() {
-    let blocks = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q08_p1.txt").unwrap().parse::<i64>().unwrap();
+fn main() -> Result<(), Box<dyn Error>>{
+    let blocks =get_everybodycodes_input(8, 2024, 1)?.parse::<i64>().unwrap();
     println!("Part 1: {}", part1(blocks));
-    let priests = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q08_p2.txt").unwrap().parse::<i64>().unwrap();
+    let priests = get_everybodycodes_input(8, 2024, 2)?.parse::<i64>().unwrap();
     println!("Part 3: {}", part2(priests, 1111,20240000));
-    let priests = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q08_p3.txt").unwrap().parse::<i64>().unwrap();
+    let priests = get_everybodycodes_input(8, 2024, 3)?.parse::<i64>().unwrap();
     println!("Part 3: {}", part3(priests, 10,202400000));
+
+    Ok(())
 }
 
 fn part1(blocks: i64) -> i64 {

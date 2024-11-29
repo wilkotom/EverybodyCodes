@@ -1,6 +1,6 @@
-use std::{collections::{HashMap, HashSet, VecDeque}, fs::read_to_string};
+use std::{collections::{HashMap, HashSet, VecDeque}, error::Error};
 
-use aochelpers::{Coordinate, ScoredItem};
+use aochelpers::{Coordinate, ScoredItem, get_everybodycodes_input};
 
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
 enum GardenArea {
@@ -16,24 +16,24 @@ struct GardenerState {
 
 }
 
-fn main() {
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q15_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>> {
+    let input = get_everybodycodes_input(15, 2024, 1)?;
     let grid = parse_grid(&input);
-    println!("Part 1 answer: {:?}", part2(&grid));
+    println!("Part 1 answer: {:?}", walk_garden(&grid).unwrap_or(0));
     
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q15_p2.txt").unwrap();
+    let input = get_everybodycodes_input(15, 2024, 2)?;
     let grid = parse_grid(&input);
-    println!("Part 2 answer: {:?}", part2(&grid));
+    println!("Part 2 answer: {:?}", walk_garden(&grid).unwrap_or(0));
 
     // This worked, but took 10 minutes to give an answer on an M2 Macbook Pro. Ripe for a real solution.
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q15_p3.txt").unwrap();
+    let input = get_everybodycodes_input(15, 2024, 3)?;
     let grid = parse_grid(&input);
-    println!("Part 3 answer: {:?}", part2(&grid));
+    println!("Part 3 answer: {:?}", walk_garden(&grid).unwrap_or(0));
 
-
+    Ok(())
 }
 
-fn part2(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
+fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
     let entrance = grid.keys().find(|k| k.y ==1).unwrap();
     let mut visited_states = HashSet::new();
     // Why a ScoredItem? Because I'd thought to use A* here. Just need to decide on the right heuristic...
@@ -127,14 +127,14 @@ const P2TEST: &str = "##########.##########
     #[test]
     fn test_p1() {
         let grid = parse_grid(P1TEST);
-        assert_eq!(part2(&grid), Some(26));
+        assert_eq!(walk_garden(&grid), Some(26));
 
     }
 
     #[test]
     fn test_p2() {
         let grid = parse_grid(P2TEST);
-        assert_eq!(part2(&grid), Some(38));
+        assert_eq!(walk_garden(&grid), Some(38));
 
     }
 }

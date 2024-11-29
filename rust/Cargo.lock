@@ -6,6 +6,7 @@ version = 3
 name = "EverybodyCodes-2024-01"
 version = "0.1.0"
 dependencies = [
+ "aochelpers",
  "itertools",
 ]
 
@@ -112,6 +113,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "EverybodyCodes-2024-16"
+version = "0.1.0"
+dependencies = [
+ "aochelpers",
+]
+
+[[package]]
+name = "EverybodyCodes-2024-17"
+version = "0.1.0"
+dependencies = [
+ "aochelpers",
+]
+
+[[package]]
+name = "EverybodyCodes-2024-18"
+version = "0.1.0"
+dependencies = [
+ "aochelpers",
+]
+
+[[package]]
+name = "EverybodyCodes-2024-19"
+version = "0.1.0"
+dependencies = [
+ "aochelpers",
+ "dirs",
+]
+
+[[package]]
 name = "addr2line"
 version = "0.24.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -152,9 +182,9 @@ checksum = "4c95c10ba0b00a02636238b814946408b1322d5ac4760326e6fb8ec956d85775"
 
 [[package]]
 name = "aochelpers"
-version = "0.6.2"
+version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92f07d4c08666404cb8e85a527348e42071997b28d73f5d9daecd22db504404a"
+checksum = "32ddc1b7affa474a6ad11615b674bb45582dddd396a9108bbd4b4432887e148c"
 dependencies = [
  "anyhow",
  "dirs",
@@ -1269,9 +1299,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.132"
+version = "1.0.133"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d726bfaff4b320266d395898905d0eba0345aae23b54aee3a737e260fd46db03"
+checksum = "c7fceb2473b9166b2294ef05efcb65a3db80803f0b03ef86a5fc88a2b85ee377"
 dependencies = [
  "itoa",
  "memchr",

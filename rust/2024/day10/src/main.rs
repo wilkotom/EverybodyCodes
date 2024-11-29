@@ -1,15 +1,16 @@
-use std::{fs::read_to_string, collections::HashMap};
-use aochelpers::Coordinate;
+use std::{collections::HashMap, error::Error};
+use aochelpers::{get_everybodycodes_input, Coordinate};
 
-fn main() {
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q10_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>>{
+    let input = get_everybodycodes_input(10, 2024, 1)?;
     let grid: HashMap<Coordinate<usize>, char> = parse_grid(&input);
     println!("Part 1: {}", part1(&grid));
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q10_p2.txt").unwrap();
+    let input = get_everybodycodes_input(10, 2024, 2)?;
     let grids = split_grids(&input);
 
     println!("Part 2: {}", grids.iter().map(part1).map(|w| calculate_power(&w)).sum::<usize>());
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q10_p3.txt").unwrap();
+
+    let input = get_everybodycodes_input(10, 2024, 3)?;
     let mut grid: HashMap<Coordinate<usize>, char> = parse_grid(&input);
     let mut last = 0;
     let mut current = 1;
@@ -18,7 +19,7 @@ fn main() {
         current = part3(&mut grid);
     }
     println!("Part 3: {}", current);
-
+    Ok(())
 }
 
 fn parse_grid(input: &str) -> HashMap<Coordinate<usize>,char> {

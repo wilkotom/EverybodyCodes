@@ -1,22 +1,22 @@
-use std::{cmp, collections::{HashMap, VecDeque}, fs::read_to_string};
-fn main() {
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q05_p1.txt").unwrap();
+use std::{cmp, collections::{HashMap, VecDeque}, error::Error};
+use aochelpers::get_everybodycodes_input;
+fn main() -> Result<(), Box<dyn Error>> {
+    let data: String = get_everybodycodes_input(5,2024,1)?;
     let mut dancers = parse_input(&data);
     for i in 0..10 {
         dance_step(&mut dancers, i);
     }
-    println!("{:?}", dancers);
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q05_p2.txt").unwrap();
+    let data: String = get_everybodycodes_input(5,2024,2)?;
     let mut dancers = parse_input(&data);
 
     println!("Part 2: {}", part2(&mut dancers));
-    println!("{:?}", dancers);
 
-    let data: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q05_p3.txt").unwrap();
+    let data: String = get_everybodycodes_input(5,2024,3)?;
     let mut dancers = parse_input(&data);
 
-    println!("Part 2: {}", part3(&mut dancers));
-
+    println!("Part 3: {}", part3(&mut dancers));
+    
+    Ok(())
 }
 
 fn part2(dancers: &mut [VecDeque<usize>]) -> usize {

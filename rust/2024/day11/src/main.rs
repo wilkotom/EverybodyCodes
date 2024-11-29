@@ -1,19 +1,21 @@
-use std::{fs::read_to_string, collections::HashMap};
-use aochelpers::Label;
+use std::{collections::HashMap, error::Error};
+use aochelpers::{Label, get_everybodycodes_input};
 
-fn main() {
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q11_p1.txt").unwrap();
+fn main() -> Result<(), Box<dyn Error>> {
+    let input = get_everybodycodes_input(11,2024,1)?;
     let data = parse_data(&input);
-    println!("{}", part1("A".parse().unwrap(),4, &data));
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q11_p2.txt").unwrap();
+    println!("Part 1: {}", part1("A".parse().unwrap(),4, &data));
+    
+    let input = get_everybodycodes_input(11,2024,2)?;
     let data = parse_data(&input);
-    println!("{}", part1("Z".parse().unwrap(),10, &data));
+    println!("Part 2: {}", part1("Z".parse().unwrap(),10, &data));
 
-    let input = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q11_p3.txt").unwrap();
+    let input = get_everybodycodes_input(11,2024,3)?;
     let data = parse_data(&input);
     let results = data.keys().map(|k| part1(*k, 20, &data)).collect::<Vec<_>>();
     println!("Part 3: {}", results.iter().max().unwrap() - results.iter().min().unwrap());
 
+    Ok(())
 }
 
 fn parse_data(input: &str) -> HashMap<Label,HashMap<Label,usize>> {

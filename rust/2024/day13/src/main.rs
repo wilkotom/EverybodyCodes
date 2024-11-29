@@ -1,15 +1,20 @@
-use std::{collections::{BinaryHeap, HashMap, HashSet}, fs::read_to_string, usize};
+use std::{collections::{BinaryHeap, HashMap, HashSet}, error::Error, usize};
 
-use aochelpers::{Coordinate, ScoredItem};
+use aochelpers::{Coordinate, ScoredItem, get_everybodycodes_input};
 
-fn main() {
-    let input: String = read_to_string("/Users/twilkinson/Downloads/everybody_codes_e2024_q13_p3.txt").unwrap();
+fn main()  -> Result<(), Box<dyn Error>> {
+    for part in [1,2,3] {
+    let input: String = get_everybodycodes_input(13, 2024, part)?;
     let mut grid: HashMap<Coordinate<usize>, usize> = HashMap::new();
     let (start_positions, end_pos) = populate_grid(&input, &mut grid);
     
     let res = part1(&start_positions, &end_pos, &grid);
 
-    println!("Part 1: {}", res);
+    println!("Part {}: {}", part, res);
+
+    }
+
+    Ok(())
 }
 
 fn part1(start_pos: &[Coordinate<usize>], end_pos: &Coordinate<usize>, grid: &HashMap::<Coordinate<usize>, usize>) -> usize {

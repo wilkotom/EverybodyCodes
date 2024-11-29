@@ -1,8 +1,8 @@
 [package]
-name = "EverybodyCodes-2024-09"
+name = "EverybodyCodes-2024-19"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
 aochelpers = "0.7.1"
-cached = "*"
+dirs = "*"
