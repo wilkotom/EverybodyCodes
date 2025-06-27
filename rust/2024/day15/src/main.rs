@@ -38,7 +38,7 @@ fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
     let mut visited_states = HashSet::new();
     // Why a ScoredItem? Because I'd thought to use A* here. Just need to decide on the right heuristic...
     let starting_state = ScoredItem{cost: 0, item:GardenerState{ position: *entrance, seeds_collected: 1}};
-    let mut desired_mask = 1;
+    let mut desired_mask = 1;  // Encoding letters as a single bit in an i32
     for v in grid.values() {
         if let GardenArea::Herb(c) = v {
             desired_mask |= 2_i32.pow(c.to_digit(36).unwrap() - 9);

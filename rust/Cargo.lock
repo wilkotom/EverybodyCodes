@@ -6,7 +6,7 @@ version = 3
 name = "EverybodyCodes-2024-01"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
  "itertools",
 ]
 
@@ -14,42 +14,42 @@ dependencies = [
 name = "EverybodyCodes-2024-02"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-03"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-04"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-05"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-06"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-07"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
  "itertools",
 ]
 
@@ -57,7 +57,7 @@ dependencies = [
 name = "EverybodyCodes-2024-08"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
  "itertools",
 ]
 
@@ -65,7 +65,7 @@ dependencies = [
 name = "EverybodyCodes-2024-09"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
  "cached",
 ]
 
@@ -73,42 +73,42 @@ dependencies = [
 name = "EverybodyCodes-2024-10"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-11"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-12"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-13"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-14"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-15"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
  "itertools",
 ]
 
@@ -116,28 +116,28 @@ dependencies = [
 name = "EverybodyCodes-2024-16"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-17"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-18"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
 ]
 
 [[package]]
 name = "EverybodyCodes-2024-19"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.8.3",
  "dirs",
 ]
 
@@ -145,7 +145,28 @@ dependencies = [
 name = "EverybodyCodes-2024-20"
 version = "0.1.0"
 dependencies = [
- "aochelpers",
+ "aochelpers 0.7.1",
+]
+
+[[package]]
+name = "EverybodyCodes-enigmatus-1"
+version = "0.1.0"
+dependencies = [
+ "aochelpers 0.8.3",
+]
+
+[[package]]
+name = "EverybodyCodes-enigmatus-2"
+version = "0.1.0"
+dependencies = [
+ "aochelpers 0.8.3",
+]
+
+[[package]]
+name = "EverybodyCodes-enigmatus-3"
+version = "0.1.0"
+dependencies = [
+ "aochelpers 0.8.3",
 ]
 
 [[package]]
@@ -197,6 +218,20 @@ dependencies = [
  "dirs",
  "log",
  "num",
+ "reqwest",
+]
+
+[[package]]
+name = "aochelpers"
+version = "0.8.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "32861e20ab6a66f4635fa04dcdac595c23be62852bc44557fc2f1e76cc0cd869"
+dependencies = [
+ "anyhow",
+ "dirs",
+ "log",
+ "num",
+ "num-traits",
  "reqwest",
 ]
 

@@ -19,7 +19,10 @@ members = [
   "2024/day17",
   "2024/day18",
   "2024/day19",
-  "2024/day20"
+  "2024/day20",
+  "stories/enigmatus/1",
+  "stories/enigmatus/2",
+  "stories/enigmatus/3"
 
     ]
 resolver = "2"

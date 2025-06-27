@@ -1,5 +1,5 @@
-use std::{collections::{HashMap, VecDeque}, error::Error, isize};
-use aochelpers::{get_everybodycodes_input, Coordinate, Coordinate3d, Direction, ScoredItem};
+use std::{collections::{HashMap, VecDeque}, error::Error};
+use aochelpers::{get_everybodycodes_input, Coordinate, Coordinate3d, Direction};
 
 #[derive(Debug,Copy,Clone,Eq,PartialEq)]
 enum Airspace {
@@ -195,9 +195,6 @@ fn part3(skyscape: &HashMap<Coordinate<isize>, Airspace>, starting_altitude: isi
             starting_column = x;
         }
     }
-    // let mut altitude = starting_altitude - (start.x - starting_column).abs();
-    // let mut y = 0;
-    // let mut distance = 0;
     let mut location = Coordinate3d{x:starting_column, y: 0, z:  starting_altitude - (start.x - starting_column).abs()};
 
     //TODO: there's a cycle here. refactor for a detected cycle length
@@ -215,7 +212,6 @@ fn part3(skyscape: &HashMap<Coordinate<isize>, Airspace>, starting_altitude: isi
             },      
             None => todo!(),
         }
-        // distance +=1;
     }
     location.y
         

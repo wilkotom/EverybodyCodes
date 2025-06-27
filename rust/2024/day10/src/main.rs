@@ -85,7 +85,6 @@ fn get_runic_word(grid: &HashMap<Coordinate<usize>,char>, x_offset: usize, y_off
         for x in (2..6).map(|x| x + x_offset ) {
             output.push(*grid.get(&Coordinate{x,y}).unwrap());
         }
-    
     }
     output
 }
