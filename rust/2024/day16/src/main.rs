@@ -50,7 +50,7 @@ fn part2(advances: &[usize], reels: &[Vec<String>], spins: isize) -> isize {
     let cycle_time = reels.iter().fold(1, |acc, n| lcm(acc,n.len())) as isize;
 
     let mut score = 0;
-    for i in 1..cycle_time+1 {
+    for i in 1..=cycle_time {
         let readout = part1(advances, reels, i, 0);
         score += score_readout(&readout, 2);
     }

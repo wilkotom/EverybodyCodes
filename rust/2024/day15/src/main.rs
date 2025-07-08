@@ -25,7 +25,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     let grid = parse_grid(&input);
     println!("Part 2 answer: {:?}", walk_garden(&grid).unwrap_or(0));
 
-    // This worked, but took 10 minutes to give an answer on an M2 Macbook Pro. Ripe for a real solution.
     let input = get_everybodycodes_input(15, 2024, 3)?;
     let grid = parse_grid(&input);
     println!("Part 3 answer: {:?}", walk_garden(&grid).unwrap_or(0));
@@ -39,6 +38,7 @@ fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
     // Why a ScoredItem? Because I'd thought to use A* here. Just need to decide on the right heuristic...
     let starting_state = ScoredItem{cost: 0, item:GardenerState{ position: *entrance, seeds_collected: 1}};
     let mut desired_mask = 1;  // Encoding letters as a single bit in an i32
+    let mut most_herbs = 0;
     for v in grid.values() {
         if let GardenArea::Herb(c) = v {
             desired_mask |= 2_i32.pow(c.to_digit(36).unwrap() - 9);
@@ -56,6 +56,12 @@ fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
         } else {
             state.item.seeds_collected
         };
+        let herbs_collected = i32::count_ones(new_seeds);
+        // prune the search space; disregard any paths which have collected two fewer herbs for the same distance travelled
+        if herbs_collected + 2 < most_herbs {
+            continue;
+        }
+        most_herbs = most_herbs.max(herbs_collected);
         for neighbour in state.item.position.neighbours() {
             if grid.contains_key(&neighbour) {
                 let next_state = ScoredItem{cost: state.cost +1, item: GardenerState{position: neighbour, seeds_collected: new_seeds}};
