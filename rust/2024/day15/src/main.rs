@@ -1,6 +1,6 @@
 use std::{collections::{HashMap, HashSet, VecDeque}, error::Error};
 
-use aochelpers::{Coordinate, ScoredItem, get_everybodycodes_input};
+use aochelpers::{Coordinate, get_everybodycodes_input};
 
 #[derive(PartialEq, Eq, Debug, Clone, Copy)]
 enum GardenArea {
@@ -13,7 +13,7 @@ enum GardenArea {
 struct GardenerState {
     position: Coordinate<usize>,
     seeds_collected: i32,
-
+    steps_taken: usize
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -35,8 +35,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
     let entrance = grid.keys().find(|k| k.y ==1).unwrap();
     let mut visited_states = HashSet::new();
-    // Why a ScoredItem? Because I'd thought to use A* here. Just need to decide on the right heuristic...
-    let starting_state = ScoredItem{cost: 0, item:GardenerState{ position: *entrance, seeds_collected: 1}};
+    let starting_state = GardenerState{ position: *entrance, seeds_collected: 1, steps_taken: 0};
     let mut desired_mask = 1;  // Encoding letters as a single bit in an i32
     let mut most_herbs = 0;
     for v in grid.values() {
@@ -47,14 +46,13 @@ fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
     let mut unvisited = VecDeque::new();
     unvisited.push_back(starting_state);
     while let Some(state) = unvisited.pop_front() {
-        if state.item.position == *entrance && state.item.seeds_collected == desired_mask {
-            return Some(state.cost);
+        if state.position == *entrance && state.seeds_collected == desired_mask {
+            return Some(state.steps_taken);
         }
-        visited_states.insert(state.item);
-        let new_seeds = if let Some(GardenArea::Herb(c)) = grid.get(&state.item.position) {
-            state.item.seeds_collected | 2_i32.pow(c.to_digit(36).unwrap() - 9) 
+        let new_seeds = if let Some(GardenArea::Herb(c)) = grid.get(&state.position) {
+            state.seeds_collected | 2_i32.pow(c.to_digit(36).unwrap() - 9) 
         } else {
-            state.item.seeds_collected
+            state.seeds_collected
         };
         let herbs_collected = i32::count_ones(new_seeds);
         // prune the search space; disregard any paths which have collected two fewer herbs for the same distance travelled
@@ -62,19 +60,16 @@ fn walk_garden(grid: &HashMap<Coordinate<usize>, GardenArea>) -> Option<usize> {
             continue;
         }
         most_herbs = most_herbs.max(herbs_collected);
-        for neighbour in state.item.position.neighbours() {
+        for neighbour in state.position.neighbours() {
             if grid.contains_key(&neighbour) {
-                let next_state = ScoredItem{cost: state.cost +1, item: GardenerState{position: neighbour, seeds_collected: new_seeds}};
-                if visited_states.insert(next_state.item) {
+                let mut next_state =  GardenerState{position: neighbour, seeds_collected: new_seeds, steps_taken: 0};
+                if visited_states.insert(next_state) {
+                    next_state.steps_taken = state.steps_taken+1;
                     unvisited.push_back(next_state);
                 }
             }
-
-            
         }
-        
     }
-
     None
 }
 

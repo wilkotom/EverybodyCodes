@@ -108,7 +108,7 @@ dependencies = [
 name = "EverybodyCodes-2024-15"
 version = "0.1.0"
 dependencies = [
- "aochelpers 0.7.1",
+ "aochelpers 0.8.3",
  "itertools",
 ]
 
