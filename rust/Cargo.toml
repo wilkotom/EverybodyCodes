@@ -22,7 +22,10 @@ members = [
   "2024/day20",
   "stories/enigmatus/1",
   "stories/enigmatus/2",
-  "stories/enigmatus/3"
+  "stories/enigmatus/3",
+  "stories/entertainment/1",
+  "stories/entertainment/2", 
+  "stories/entertainment/3"
 
     ]
 resolver = "2"
