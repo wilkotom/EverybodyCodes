@@ -13,7 +13,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     println!("Part 2: {}", solve(&grid, Coordinate{x:0, y:0}, Some(bounds), &HashSet::new()).len());
     let input_data = get_everybodycodes_input(12, 2025, 3)?;
     let grid: Grid<u8> = parse_data(&input_data);
-    println!("Part 1: {}", part3(&grid));
+    println!("Part 3: {}", part3(&grid));
 
     Ok(())
 }
@@ -35,39 +35,23 @@ fn part3(grid: &Grid<u8>) -> usize {
     candidates.sort_by(|a,b| grid.get(&b).cmp(&grid.get(&a)));
 
     let mut already_burned: HashSet<Coordinate<usize>> = HashSet::new();
-    for candidate in candidates.iter() {
-        if already_burned.contains(candidate) {
-            continue;
+    let mut already_seen: HashSet<Coordinate<usize>> = HashSet::new();
+    for _ in 0..3 {
+        let mut best = HashSet::new();
+        for candidate in candidates.iter() {
+            if already_seen.contains(candidate) {
+                continue;
+            }
+            let burned = solve(grid, *candidate, None, &already_burned);
+            if burned.len() > best.len() {
+                best = burned.clone()
+            }
+            already_seen.extend(burned);
         }
-        let burned = solve(grid, *candidate, None, &HashSet::new());
-        if burned.len() > already_burned.len() {
-            already_burned = burned
-        }       
+        already_burned.extend(best);
+        already_seen.drain();
     }
-    let mut r2best = HashSet::new();
-    for candidate in candidates.iter().filter(|c| !already_burned.contains(c)) {
-        if r2best.contains(candidate) {
-            continue;
-        }
-        let burned = solve(grid, *candidate, None, &already_burned);
-
-        if burned.len() > r2best.len() {
-            r2best = burned
-        }       
-    }
-    already_burned.extend(r2best);
-    let mut r3best = HashSet::new();
-    for candidate in candidates.iter().filter(|c| !(already_burned.contains(c)) ) {
-        if r3best.contains(candidate) {
-            continue;
-        }
-        let burned = solve(grid, *candidate, None, &already_burned);
-        if burned.len() > r3best.len() {
-            r3best = burned
-        }       
-    }
-    r3best.len() + already_burned.len()
-    
+    already_burned.len()
 }
 
 fn solve(grid: &Grid<u8>, start: Coordinate<usize>, second: Option<Coordinate<usize>>, already_burned: &HashSet<Coordinate<usize>>) -> HashSet<Coordinate<usize>> {
