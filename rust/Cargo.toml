@@ -25,7 +25,22 @@ members = [
   "stories/enigmatus/3",
   "stories/entertainment/1",
   "stories/entertainment/2", 
-  "stories/entertainment/3"
+  "stories/entertainment/3",
+  "2025/day01",
+  "2025/day02",
+  "2025/day03",
+  "2025/day04",
+  "2025/day05",
+  "2025/day06",
+  "2025/day07",
+  "2025/day08",
+  "2025/day09",
+  "2025/day10",
+  "2025/day11",
+  "2025/day12",
+  "2025/day13",
+  "2025/day14",
+  "2025/day15",
 
     ]
 resolver = "2"

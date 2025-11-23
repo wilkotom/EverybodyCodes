@@ -43,10 +43,6 @@ impl Die {
         self.pulse += 1 + self.roll_count + self.seed;
         self.faces[self.current_face]
     }
-
-    fn read(self: &Self) -> i32 {
-        self.faces[self.current_face]
-    }
 }
 
 fn main() -> Result<(), Box<dyn Error>>{
