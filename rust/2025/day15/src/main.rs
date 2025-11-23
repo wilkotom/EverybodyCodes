@@ -77,13 +77,11 @@ fn solve(walls: Vec<Rectangle<i32>>, goal: Coordinate<i32>) -> Option<i32> {
         let end_y = *y_lookup.get(&wall.bottom_right.y).unwrap();
         for y in start_y..=end_y {
             for x in start_x..=end_x {
-                grid.insert(Coordinate{x: x as i32,y: y as i32});
+                grid.insert(Coordinate{x,y});
             }
         }
     }
-    let start_x = x_values.iter().position(|&n| n == 0).unwrap() as i32;
-    let start_y = y_values.iter().position(|&n| n == 0).unwrap() as i32;
-    let starting_state = ScoredItem{cost:0, item: Coordinate{x: start_x, y: start_y}};
+    let starting_state = ScoredItem{cost:0, item: Coordinate{x:  *x_lookup.get(&0).unwrap(), y: *y_lookup.get(&0).unwrap()}};
     let new_goal = Coordinate{x: *x_lookup.get(&goal.x).unwrap(), y: *y_lookup.get(&goal.y).unwrap()};
     grid.remove(&new_goal);
 
