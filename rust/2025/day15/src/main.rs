@@ -5,7 +5,7 @@ use std::{collections::{BinaryHeap, HashMap, HashSet}, error::Error};
 fn main() -> Result<(), Box<dyn Error>> {
     let data = get_everybodycodes_input(15, 2025, 1)?;
     let (arena, goal) = parse_data(&data);
-    println!("Part 2: {}", solve(arena, goal).unwrap_or(0));
+    println!("Part 1: {}", solve(arena, goal).unwrap_or(0));
     let data = get_everybodycodes_input(15, 2025, 2)?;
     let (arena, goal) = parse_data(&data);
     println!("Part 2: {}", solve(arena, goal).unwrap_or(0));
@@ -47,8 +47,6 @@ fn parse_data(data: &str) -> (Vec<Rectangle<i32>>, Coordinate<i32>) {
 
     (walls, current_location)
 }
-
-
 
 fn solve(walls: Vec<Rectangle<i32>>, goal: Coordinate<i32>) -> Option<i32> {
     let mut x_values = HashSet::new();
@@ -97,9 +95,10 @@ fn solve(walls: Vec<Rectangle<i32>>, goal: Coordinate<i32>) -> Option<i32> {
             continue;
         }
         seen.insert(state.item);
+        let bounds = Coordinate{x: x_values.len() as i32, y: y_values.len() as i32};
 
         for neighbour in state.item.neighbours() {
-            if neighbour.x >=0 && neighbour.x < x_values.len().try_into().unwrap() && neighbour.y >=0 && neighbour.y < y_values.len().try_into().unwrap() && !(grid.contains(&neighbour) && !seen.contains(&neighbour)) {
+            if neighbour.x >=0 && neighbour.x < bounds.x && neighbour.y >=0 && neighbour.y < bounds.y && !grid.contains(&neighbour) && !seen.contains(&neighbour) {
                 let new_cost = state.cost + (x_values[state.item.x as usize] - x_values[neighbour.x as usize]).abs() + (y_values[state.item.y as usize] - y_values[neighbour.y as usize]).abs();
                 unvisited.push(ScoredItem { cost: new_cost, item: neighbour });
             }
