@@ -30,23 +30,19 @@ fn part3(sought: &HashSet<Coordinate<usize>>) -> usize {
     let mut score = 0;
     let mut grid: HashSet<Coordinate<usize>> = HashSet::new();
 
-    while round < 1000000000 {
+    while round < 1_000_000_000 {
         let board_vec = hashable_board(&grid, &Coordinate { x: 33, y: 33 });
-        let mut skipped = false;
-        if !skipped {
-            if let Some((prev_round, prev_score)) = seen_before.get(&board_vec)  {
-                    skipped = true;
-                    let elapsed_time = round - prev_round;
-                    let score_boost = score - prev_score;
-                    while round + elapsed_time < 1000000000 {
-                        round += elapsed_time;
-                        score += score_boost;
-                    }
-            } else {
-                seen_before.insert(board_vec, (round, score));
-            }
+        if let Some((prev_round, prev_score)) = seen_before.get(&board_vec)  {
+                let elapsed_time: i32 = round - prev_round;
+                let score_boost = score - prev_score;
+                while round + elapsed_time < 1_000_000_000 {
+                    round += elapsed_time;
+                    score += score_boost;
+                }
+        } else {
+            seen_before.insert(board_vec, (round, score));
         }
-
+        
         if grid_match(&grid, &sought) {
             score += grid.len();
         }

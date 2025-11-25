@@ -254,6 +254,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "EverybodyCodes-2025-16"
+version = "0.1.0"
+dependencies = [
+ "aochelpers 0.8.3",
+]
+
+[[package]]
 name = "EverybodyCodes-enigmatus-1"
 version = "0.1.0"
 dependencies = [

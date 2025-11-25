@@ -96,7 +96,6 @@ fn solve(walls: Vec<Rectangle<i32>>, goal: Coordinate<i32>) -> Option<i32> {
         }
         seen.insert(state.item);
         let bounds = Coordinate{x: x_values.len() as i32, y: y_values.len() as i32};
-
         for neighbour in state.item.neighbours() {
             if neighbour.x >=0 && neighbour.x < bounds.x && neighbour.y >=0 && neighbour.y < bounds.y && !grid.contains(&neighbour) && !seen.contains(&neighbour) {
                 let new_cost = state.cost + (x_values[state.item.x as usize] - x_values[neighbour.x as usize]).abs() + (y_values[state.item.y as usize] - y_values[neighbour.y as usize]).abs();
