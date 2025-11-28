@@ -82,11 +82,11 @@ fn part2(grid: &HashMap<Coordinate<i32>, i32>, volcano: Coordinate<i32>) -> i32 
 }
 
 fn part3(grid: &HashMap<Coordinate<i32>, i32>, volcano: Coordinate<i32>, start: Coordinate<i32>) -> i32{
-    let mut radius = 0;
+    let mut radius = 1;
     let bounds: Coordinate<i32> = grid.keys().fold(Coordinate{x:0,y:0}, |c, k| Coordinate { x: c.x.max(k.x), y: c.y.max(k.y) });
 
 
-    while radius <  bounds.x.min(bounds.y)  {
+    while radius <  bounds.x.min(bounds.y) /2 {
         let starting_state = ScoredItem{cost:0, item: LoopState{east: false, west: false, south: false, location: start}};
         let mut next_states = BinaryHeap::new();
         next_states.push(starting_state);
