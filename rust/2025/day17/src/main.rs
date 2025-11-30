@@ -92,7 +92,11 @@ fn part3(grid: &HashMap<Coordinate<i32>, i32>, volcano: Coordinate<i32>, start: 
         next_states.push(starting_state);
         let mut visited = HashSet::new();
         while let Some(state) = next_states.pop() {
-            if visited.contains(&state.item){
+            if visited.contains(&state.item) || 
+                (state.item.west && state.item.location.y < volcano.y && state.item.location.x < volcano.x ) ||
+                (state.item.south && state.item.location.x < volcano.x) && state.item.location.y > volcano.y {
+                // (state.item.east && state.item.location.y < volcano.y ) {
+                
                 continue;
             }
             visited.insert(state.item);
