@@ -1,0 +1,7 @@
+[package]
+name = "EverybodyCodes-melody-1"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aochelpers = "0.9.1"
